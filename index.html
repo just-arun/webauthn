@@ -78,7 +78,7 @@
                 },
             })
                 .then((cred) => {
-                    info.textContent = `ID: ${cred.id} TYPE: ${cred.type}`
+                    info.textContent = `ID: ${cred.id} TYPE: ${cred.type} rawID: ${base64url.encode(cred.rawId)}`
                 })
                 .catch(err => {
                     console.log(err);
