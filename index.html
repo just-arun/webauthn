@@ -43,6 +43,7 @@
                         // with this authenticator
 
                         let id = localStorage.getItem("finger")
+                    info.textContent += `\n\n id: ${id}`
                         var idList = [{
                             id,
                             transports: ["usb", "nfc", "ble"],
