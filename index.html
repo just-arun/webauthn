@@ -15,7 +15,7 @@
         <div id="info"></div>
         <div id="output"></div>
         <div id="error"
-            style="color: red; padding: 10px 20px; background: rgba(255, 13, 13, 0.418);border-radius: 4px;"></div>
+            style="color: red; padding: 10px 20px; background: rgba(255, 13, 13, 0.1);border-radius: 4px;"></div>
     </div>
     <script>
         const info = document.querySelector("div#info");
@@ -48,7 +48,7 @@
                     // Relying Party (a.k.a. - Service):
                     rp: {
                         name: "Acme",
-                        id: "webauth.acme"
+                        id: "biom.netlify.app"
                     },
 
                     // User:
@@ -81,6 +81,7 @@
 
                 })
                 .catch(err => {
+                    console.log(err);
                     error.textContent = typeof error == "string" ? err : JSON.stringify({ err })
                 })
         }
