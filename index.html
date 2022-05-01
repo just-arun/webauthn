@@ -41,12 +41,21 @@
                         // We can proceed with the creation of a PublicKeyCredential
                         // with this authenticator
 
-                        info.textContent = typeof available == "string" ? available : JSON.stringify({ available })
+                        let id = localStorage.getItem("finger")
+                        var idList = [{
+                            id,
+                            transports: ["usb", "nfc", "ble"],
+                            type: "public-key"
+                        }];
+                        getCredentialDefaultArgs.publicKey.allowCredentials = idList;
+                        return navigator.credentials.get(getCredentialDefaultArgs);
                     } else {
                         // Use another kind of authenticator or a classical login/password
                         // workflow
                         error.textContent = "not supported"
                     }
+                }).then((res) => {
+                    info.textContent = `${info.textContent} \n\n  assertion ${res.id}`
                 }).catch(function (err) {
                     // Something went wrong
                     console.error(err);
@@ -89,16 +98,7 @@
             })
                 .then((cred) => {
                     info.textContent = `${info.textContent} \n\n ID: ${cred.id} TYPE: ${cred.type} }`
-                    var idList = [{
-                        id: cred.rawId,
-                        transports: ["usb", "nfc", "ble"],
-                        type: "public-key"
-                    }];
-                    getCredentialDefaultArgs.publicKey.allowCredentials = idList;
-                    return navigator.credentials.get(getCredentialDefaultArgs);
-                })
-                .then(res => {
-                    info.textContent = `${info.textContent} \n\n  assertion ${res.id}`
+                    localStorage.setItem("finger", cred.rawId)
                 })
                 .catch(err => {
                     console.log(err);
