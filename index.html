@@ -11,9 +11,11 @@
 <body>
     <div id="main">
         <button onclick="login()">login</button>
+        <button onclick="registerFun()">register</button>
         <div id="info"></div>
         <div id="output"></div>
-        <div id="error" style="color: red; padding: 10px 20px; background: rgba(255, 13, 13, 0.418);border-radius: 4px;"></div>
+        <div id="error"
+            style="color: red; padding: 10px 20px; background: rgba(255, 13, 13, 0.418);border-radius: 4px;"></div>
     </div>
     <script>
         const info = document.querySelector("div#info");
@@ -29,7 +31,7 @@
                         // We can proceed with the creation of a PublicKeyCredential
                         // with this authenticator
 
-                        info.textContent = typeof available == "string" ? available : JSON.stringify({available})
+                        info.textContent = typeof available == "string" ? available : JSON.stringify({ available })
                     } else {
                         // Use another kind of authenticator or a classical login/password
                         // workflow
@@ -39,6 +41,48 @@
                     // Something went wrong
                     console.error(err);
                 });
+        }
+        const registerFun = () => {
+            navigator.credentials.create({
+                publicKey: {
+                    // Relying Party (a.k.a. - Service):
+                    rp: {
+                        name: "Acme",
+                        id: "webauth.acme"
+                    },
+
+                    // User:
+                    user: {
+                        id: new Uint8Array(16),
+                        name: "john.p.smith@example.com",
+                        displayName: "John P. Smith"
+                    },
+
+                    pubKeyCredParams: [{
+                        type: "public-key",
+                        alg: -7
+                    }],
+
+                    attestation: "none",
+
+                    timeout: 60000,
+
+                    challenge: new Uint8Array([ // must be a cryptographically random number sent from a server
+                        0x8C, 0x0A, 0x26, 0xFF, 0x22, 0x91, 0xC1, 0xE9, 0xB9, 0x4E, 0x2E, 0x17, 0x1A, 0x98, 0x6A, 0x73,
+                        0x71, 0x9D, 0x43, 0x48, 0xD5, 0xA7, 0x6A, 0x15, 0x7E, 0x38, 0x94, 0x52, 0x77, 0x97, 0x0F, 0xEF
+                    ]).buffer,
+                    authenticatorSelection: {
+                        authenticatorAttachment: "platform",
+                        userVerification: "required",
+                    }
+                },
+            })
+                .then((cred) => {
+
+                })
+                .catch(err => {
+                    error.textContent = typeof error == "string" ? err : JSON.stringify({ err })
+                })
         }
     </script>
 </body>
