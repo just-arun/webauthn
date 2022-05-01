@@ -88,7 +88,7 @@
                 },
             })
                 .then((cred) => {
-                    info.textContent = `${info.textContent} \n ID: ${cred.id} TYPE: ${cred.type} }`
+                    info.textContent = `${info.textContent} \n\n ID: ${cred.id} TYPE: ${cred.type} }`
                     var idList = [{
                         id: cred.rawId,
                         transports: ["usb", "nfc", "ble"],
@@ -98,7 +98,7 @@
                     return navigator.credentials.get(getCredentialDefaultArgs);
                 })
                 .then(res => {
-                    info.textContent = `${info.textContent} \n  assertion ${res}`
+                    info.textContent = `${info.textContent} \n\n  assertion ${res.id}`
                 })
                 .catch(err => {
                     console.log(err);
