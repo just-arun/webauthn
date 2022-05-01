@@ -78,7 +78,7 @@
                 },
             })
                 .then((cred) => {
-                    info.textContent = cred
+                    info.textContent = `ID: ${cred.id} TYPE: ${cred.type}`
                 })
                 .catch(err => {
                     console.log(err);
