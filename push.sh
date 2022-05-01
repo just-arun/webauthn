@@ -1,3 +1,3 @@
 git add .
-git commit -am "test deploy"
+git commit -am "removing domain"
 git push
