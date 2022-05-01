@@ -73,7 +73,7 @@
                 .then((cred) => {
                     var idList = [{
                         id: cred.rawId,
-                        transports: ["usb", "nfc", "ble"],
+                        transports: ["usb", "nfc", "ble","internal"],
                         type: "public-key"
                     }];
                     getCredentialDefaultArgs.publicKey.allowCredentials = idList;
