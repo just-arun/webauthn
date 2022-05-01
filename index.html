@@ -78,7 +78,7 @@
                 },
             })
                 .then((cred) => {
-
+                    info.textContent = JSON.stringify({cred})
                 })
                 .catch(err => {
                     console.log(err);
