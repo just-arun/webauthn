@@ -37,6 +37,7 @@
         const login = () => {
             PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
                 .then(function (available) {
+                    info.textContent += `\n\n ${available}`
                     if (available) {
                         // We can proceed with the creation of a PublicKeyCredential
                         // with this authenticator
